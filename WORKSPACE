@@ -29,8 +29,8 @@ maven_install(
         "com.google.android.material:material:1.0.0",
         "androidx.constraintlayout:constraintlayout:1.1.3",
         "androidx.navigation:navigation-fragment-ktx:2.1.0",
-        "androidx.navigation:navigation-ui-ktx:2.1.0"
-
+        "androidx.navigation:navigation-ui-ktx:2.1.0",
+        "io.reactivex.rxjava2:rxjava:2.2.19",
     ],
     repositories = [
         "https://jcenter.bintray.com/",
@@ -38,3 +38,21 @@ maven_install(
         "https://repo1.maven.org/maven2",
     ],
 )
+
+rules_kotlin_version = "legacy-1.3.0"
+
+rules_kotlin_sha = "4fd769fb0db5d3c6240df8a9500515775101964eebdf85a3f9f0511130885fde"
+
+http_archive(
+    name = "io_bazel_rules_kotlin",
+    sha256 = rules_kotlin_sha,
+    strip_prefix = "rules_kotlin-%s" % rules_kotlin_version,
+    type = "zip",
+    urls = ["https://github.com/bazelbuild/rules_kotlin/archive/%s.zip" % rules_kotlin_version],
+)
+
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_register_toolchains")
+
+kotlin_repositories()
+
+kt_register_toolchains()
