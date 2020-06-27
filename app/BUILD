@@ -1,6 +1,6 @@
 load("@rules_android//android:rules.bzl", "android_library")
 
-android_library(
+android_binary(
     name="app_module",
     custom_package = "com.rahullohra.bazelandroid",
     srcs=["src/main/java/com/rahullohra/bazelandroid/MainActivity.java"],
